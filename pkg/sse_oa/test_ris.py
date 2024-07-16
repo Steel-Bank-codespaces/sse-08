@@ -5,7 +5,7 @@ ref_ris = '''TY  - JOUR
 AU  - John R. Kitchin
 PY  - 2015
 TI  - Examples of Effective Data Sharing in Scientific Publishing
-JO  - ACS Catalysis
+JO  - ACS catalysis
 VL  - 5
 IS  - 6
 SP  - 3894

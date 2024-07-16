@@ -23,7 +23,8 @@ class Works:
 
         title = self.data['title']
 
-        journal = self.data['source']['display_name']
+        journal = self.data['primary_location']['source']['display_name']
+
         volume = self.data['biblio']['volume']
 
         issue = self.data['biblio']['issue']
@@ -50,7 +51,7 @@ class Works:
 
         title = self.data['title']
 
-        journal = f"[{self.data['host_venue']['display_name']}]({self.data['host_venue']['id']})"
+        journal = f"[{self.data['primary_location']['source']['display_name']}]({self.data['primary_location']['source']['id']})"
         volume = self.data['biblio']['volume']
 
         issue = self.data['biblio']['issue']
@@ -87,17 +88,17 @@ class Works:
     @property
     def ris(self):
         fields = []
-        if self.data['type'] == 'journal-article':
+        if self.data['type'] == 'article':
             fields += ['TY  - JOUR']
         else:
-            raise Exception("Unsupported type {self.data['type']}")
+            raise Exception(f"Unsupported type {self.data['type']}")
 
         for author in self.data['authorships']:
             fields += [f'AU  - {author["author"]["display_name"]}']
 
         fields += [f'PY  - {self.data["publication_year"]}']
         fields += [f'TI  - {self.data["title"]}']
-        fields += [f'JO  - {self.data["host_venue"]["display_name"]}']
+        fields += [f'JO  - {self.data["primary_location"]["source"]["display_name"]}']
         fields += [f'VL  - {self.data["biblio"]["volume"]}']
 
         if self.data['biblio']['issue']:
